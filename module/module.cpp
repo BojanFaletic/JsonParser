@@ -3,10 +3,7 @@
 import json.parser;
 
 // add function
-int add(int i, int j) {
-  json::MyFunc();
-  return i + j;
-}
+int add(int i, int j) { return i + j; }
 
 // make module
 PYBIND11_MODULE(JsonParser, m) {
