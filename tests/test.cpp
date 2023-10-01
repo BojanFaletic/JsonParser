@@ -1,4 +1,5 @@
 import json.parser;
+import json.tokanizer;
 
 #include <fstream>
 #include <iostream>
@@ -13,12 +14,15 @@ int main() {
     throw runtime_error("Could not open file");
   }
 
-  // read file
-  string line;
-  while (getline(test, line)) {
-    cout << line << endl;
-  }
+  // read full file into string
+  string str((istreambuf_iterator<char>(test)), istreambuf_iterator<char>());
 
+  cout << str << endl;
+
+  json::Tokanizer tokanizer(str);
+  for (auto const &token : tokanizer) {
+    cout << token << endl;
+  }
   cout << "Hello World!\n";
 
   return 0;
