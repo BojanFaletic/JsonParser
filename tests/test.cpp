@@ -5,25 +5,36 @@ import json.tokanizer;
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <format>
 
 using namespace std;
 
 int main() {
-  ifstream test("test.json");
-  if (!test.is_open()) {
-    throw runtime_error("Could not open file");
-  }
+	ifstream test("test.json");
+	if (!test.is_open()) {
+		throw runtime_error("Could not open file");
+	}
 
-  // read full file into string
-  string str((istreambuf_iterator<char>(test)), istreambuf_iterator<char>());
+	// read full file into string
+	string str((istreambuf_iterator<char>(test)), istreambuf_iterator<char>());
 
-  cout << str << endl;
+	cout << str << endl;
 
-  json::Tokanizer tokanizer(str);
-  for (auto const &token : tokanizer) {
-    cout << token << endl;
-  }
-  cout << "Hello World!\n";
+	json::Tokanizer tokanizer(str);
 
-  return 0;
+	int i = 0;
+	while (true) {
+		auto token = tokanizer.NextToken();
+		if (token.type == json::TokenType::Error || token.type == json::TokenType::EndOfFile) {
+			break;
+		}
+		std::cout << std::format("cnt: {:<5} name: {:<10} value: {}\n", i, token.name, token.value);
+		i++;
+	}
+
+
+
+	cout << "Hello World!\n";
+
+	return 0;
 }

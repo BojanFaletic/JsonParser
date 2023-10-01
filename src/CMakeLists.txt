@@ -5,5 +5,5 @@ add_library(json)
 target_sources(json PRIVATE
     FILE_SET cxx_modules TYPE CXX_MODULES FILES
     "json.parser.ixx"
-    "json.tokanizer.ixx"
+    "json.tokenizer.ixx"
 )

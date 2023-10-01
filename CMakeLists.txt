@@ -14,6 +14,9 @@ message( STATUS "CMAKE_VERSION: " ${CMAKE_VERSION} )
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# enable optimization
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+
 # MSVC include std. library
 
 # build library
