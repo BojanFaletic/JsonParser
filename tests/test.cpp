@@ -32,6 +32,9 @@ int main() {
 		i++;
 	}
 
+	json::Parser parser(str);
+
+	int value = parser.Get("Hello").value_or(0);
 
 
 	cout << "Hello World!\n";

@@ -4,6 +4,7 @@ module;
 #include <string>
 #include <variant>
 #include <vector>
+#include <optional>
 
 using namespace std;
 
@@ -21,11 +22,24 @@ namespace json {
 	};
 
 	export class Parser {
+		const string json_;
+		uint32_t pos_ = 0;
+
 	public:
-		Parser() = default;
+		Parser(const string json) : json_(json) {}
 		~Parser() = default;
 
-		void parse(const string& json) {}
+		void parse() {
+
+		}
+
+		optional<List_t> GetArray(const string& key) {
+			return nullopt;
+		}
+
+		optional<int> Get(const string& key) {
+			return nullopt;
+		}
 
 	private:
 		Blob root;
