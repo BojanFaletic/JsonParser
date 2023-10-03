@@ -16,6 +16,26 @@ import json.string;
 
 namespace json {
 
+enum class TokenType {
+  ObjectStart,
+  ObjectEnd,
+  ArrayStart,
+  ArrayEnd,
+  Comma,
+  Colon,
+  NewLine,
+  Space,
+  Tab,
+  CarriageReturn,
+  True,
+  False,
+  Null,
+  String,
+  Number,
+  NumberDecimal,
+  Boolean,
+};
+
 enum class StaticTokenType {
   ObjectStart,
   ObjectEnd,
@@ -38,6 +58,27 @@ enum class DynamicTokenType {
   NumberDecimal,
   Boolean,
 };
+
+const unordered_map<TokenType, variant<StaticTokenType, DynamicTokenType>>
+    TokenMap{
+        {TokenType::ObjectStart, StaticTokenType::ObjectStart},
+        {TokenType::ObjectEnd, StaticTokenType::ObjectEnd},
+        {TokenType::ArrayStart, StaticTokenType::ArrayStart},
+        {TokenType::ArrayEnd, StaticTokenType::ArrayEnd},
+        {TokenType::Comma, StaticTokenType::Comma},
+        {TokenType::Colon, StaticTokenType::Colon},
+        {TokenType::NewLine, StaticTokenType::NewLine},
+        {TokenType::Space, StaticTokenType::Space},
+        {TokenType::Tab, StaticTokenType::Tab},
+        {TokenType::CarriageReturn, StaticTokenType::CarriageReturn},
+        {TokenType::True, StaticTokenType::True},
+        {TokenType::False, StaticTokenType::False},
+        {TokenType::Null, StaticTokenType::Null},
+        {TokenType::String, DynamicTokenType::String},
+        {TokenType::Number, DynamicTokenType::Number},
+        {TokenType::NumberDecimal, DynamicTokenType::NumberDecimal},
+        {TokenType::Boolean, DynamicTokenType::Boolean},
+    };
 
 const unordered_map<StaticTokenType, const string_view> StaticTokenMap{
     {StaticTokenType::ObjectStart, "{"},
@@ -87,7 +128,7 @@ bool tokenize(String &str, const StaticTokenType token) {
   return false;
 }
 
-optional<StaticTokenType> decode(
+export optional<StaticTokenType> decodeStatic(
     String &str, const vector<StaticTokenType> &tokens) noexcept {
   for (const StaticTokenType &token : tokens) {
     if (tokenize(str, token)) {
@@ -97,7 +138,7 @@ optional<StaticTokenType> decode(
   return nullopt;
 }
 
-optional<int> DecodeNumber(String &data) noexcept {
+export optional<int> decodeNumber(String &data) noexcept {
   if (data.Size() == 0) {
     return nullopt;
   }
@@ -125,7 +166,7 @@ optional<int> DecodeNumber(String &data) noexcept {
   return nullopt;
 }
 
-optional<float> DecodeDecimalNumber(String &data) noexcept {
+export optional<float> decodeDecimalNumber(String &data) noexcept {
   if (data.Size() == 0) return nullopt;
 
   auto isDecimalFirstSymbol = [](const char c) {
@@ -159,7 +200,7 @@ inline bool stringCompare(const string_view str1,
   return strncmp(str1.data(), str2.data(), str2.length()) == 0;
 }
 
-optional<string_view> DecodeString(String &data) noexcept {
+export optional<string_view> decodeString(String &data) noexcept {
   const char stringSybol[] = "\"";
 
   if (!stringCompare(data.Get(), stringSybol)) return nullopt;

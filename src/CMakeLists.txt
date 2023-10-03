@@ -8,4 +8,4 @@ target_sources(json PRIVATE
     "json.tokenizer.ixx"
     "json.tokenizer_v2.ixx"
     "json.string.ixx"
-)
+ "json.tokenizerStates.ixx")

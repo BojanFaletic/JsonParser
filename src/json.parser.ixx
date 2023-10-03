@@ -10,6 +10,9 @@ using namespace std;
 
 export module json.parser;
 
+import json.string;
+import json.tokenizer_v2;
+
 namespace json {
 
 	struct Blob;
@@ -22,11 +25,11 @@ namespace json {
 	};
 
 	export class Parser {
-		const string json_;
+		String json_;
 		uint32_t pos_ = 0;
 
 	public:
-		Parser(const string json) : json_(json) {}
+		Parser(const string& json) : json_(json) {}
 		~Parser() = default;
 
 		void parse() {
