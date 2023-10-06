@@ -5,7 +5,7 @@ project(JsonParser VERSION 0.1.0 LANGUAGES CXX)
 # 3.26.4-msvc4
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "2182bf5c-ef0d-489a-91da-49dbc3090d2a")
 # 3.27.3
-#set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "aa1f7df0-828a-4fcd-9afc-2dc80491aca7")
+# set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "aa1f7df0-828a-4fcd-9afc-2dc80491aca7")
 
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_DYNDEP 1)
 message( STATUS "CMAKE_VERSION: " ${CMAKE_VERSION} )
@@ -23,5 +23,5 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 add_subdirectory(src)
 
 # include directories module
-add_subdirectory(module)
+# add_subdirectory(module)
 add_subdirectory(tests)

@@ -1,0 +1,8 @@
+{
+  "C_Cpp.autocomplete": "disabled",
+  "files.associations": {
+    "*.cshtml": "html",
+    "*.proto": "c",
+    "*.ixx": "cpp"
+  }
+}
